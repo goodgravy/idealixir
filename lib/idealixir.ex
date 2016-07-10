@@ -1,0 +1,2 @@
+defmodule Idealixir do
+end
