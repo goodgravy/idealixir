@@ -8,32 +8,16 @@ defmodule Idealixir do
     end
 
     defp id_and_secret do
-      case [encoded_client_id, encoded_client_secret] do
-        [{:ok, encoded_client_id}, {:ok, encoded_client_secret}] -> {:ok, [encoded_client_id, encoded_client_secret] |> Enum.join(":")}
-        [{_, id_error}, {_, secret_error}]                       -> {:error, [id_error, secret_error] |> Enum.join(". ")}
-      end
+      with {:ok, client_id} <- encoded_env_var("IDEALISTA_CLIENT_ID"),
+      {:ok, client_secret} <- encoded_env_var("IDEALISTA_CLIENT_SECRET"),
+      do: {:ok, client_id <> ":" <> client_secret}
     end
 
-    defp encoded_client_id do
-      case env_var("IDEALISTA_CLIENT_ID") do
-        {:ok, client_id} -> {:ok, URI.encode client_id}
-        {_, error}  -> {:error, error}
-      end
-    end
-
-    defp encoded_client_secret do
-      case env_var("IDEALISTA_CLIENT_SECRET") do
-        {:ok, client_secret} -> {:ok, URI.encode client_secret}
-        {_, error}  -> {:error, error}
-      end
-    end
-
-    defp env_var(var_name) do
+    defp encoded_env_var(var_name) do
       case System.get_env(var_name) do
         nil   -> {:error, "Required environment variable, #{var_name}, was not set"}
-        value -> {:ok, value}
+        value -> {:ok, URI.encode value}
       end
     end
   end
 end
-
