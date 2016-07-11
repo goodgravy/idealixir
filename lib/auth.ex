@@ -15,30 +15,23 @@ defmodule Idealixir do
     end
 
     defp encoded_client_id do
-      case client_id do
+      case env_var("IDEALISTA_CLIENT_ID") do
         {:ok, client_id} -> {:ok, URI.encode client_id}
         {_, error}  -> {:error, error}
       end
     end
 
     defp encoded_client_secret do
-      case client_secret do
+      case env_var("IDEALISTA_CLIENT_SECRET") do
         {:ok, client_secret} -> {:ok, URI.encode client_secret}
         {_, error}  -> {:error, error}
       end
     end
 
-    defp client_id do
-      case System.get_env("IDEALISTA_CLIENT_ID") do
-        nil       -> {:error, "Required environment variable, IDEALISTA_CLIENT_ID, was not set"}
-        client_id -> {:ok, client_id}
-      end
-    end
-
-    defp client_secret do
-      case System.get_env("IDEALISTA_CLIENT_SECRET") do
-        nil           -> {:error, "Required environment variable, IDEALISTA_CLIENT_SECRET, was not set"}
-        client_secret -> {:ok, client_secret}
+    defp env_var(var_name) do
+      case System.get_env(var_name) do
+        nil   -> {:error, "Required environment variable, #{var_name}, was not set"}
+        value -> {:ok, value}
       end
     end
   end
