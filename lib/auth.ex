@@ -1,10 +1,8 @@
 defmodule Idealixir do
   defmodule Auth do
     def base64_id_and_secret do
-      case id_and_secret do
-        {:ok, id_and_secret} -> {:ok, Base.encode64(id_and_secret)}
-        {_, message}         -> {:error, message}
-      end
+      with {:ok, id_and_secret} <- id_and_secret(),
+      do: {:ok, Base.encode64(id_and_secret)}
     end
 
     defp id_and_secret do
