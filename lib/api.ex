@@ -4,11 +4,8 @@ defmodule Idealixir.Api do
   @default_base_uri "https://api.idealista.com"
 
   def bearer_token do
-    response = with {:ok, auth} <- Idealixir.Auth.base64_id_and_secret,
-      {:ok, response} <- post("/oauth/token", "grant_type=client_credentials", [
-        {"Authorization", "Basic " <> auth},
-        {"Content-Type", "application/x-www-form-urlencoded;charset=UTF-8"}
-      ]),
+    with {:ok, auth} <- Idealixir.Auth.base64_id_and_secret,
+      {:ok, response} <- request("/oauth/token", "grant_type=client_credentials", auth),
     do: Poison.decode(response.body, as: %Idealixir.BearerToken{})
   end
 
@@ -21,5 +18,12 @@ defmodule Idealixir.Api do
       nil   -> @default_base_uri
       value -> value
     end
+  end
+
+  defp request(path, body, auth) do
+    post(path, body, [
+      {"Authorization", "Basic " <> auth},
+      {"Content-Type", "application/x-www-form-urlencoded;charset=UTF-8"}
+    ])
   end
 end
