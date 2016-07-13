@@ -16,11 +16,10 @@ defmodule IdealixirApiTest do
     :ok
   end
 
-  test "bearer_token" do
+  test "bearer_token returns a token" do
     use_cassette "get_token_success" do
-      assert {:ok, response} = Idealixir.Api.bearer_token
-      assert response.status_code == 200
-      assert response.body =~ ~r/"access_token":"eyJh.+miQo"/
+      assert {:ok, token} = Idealixir.Api.bearer_token
+      assert token.access_token =~ ~r/eyJh.+miQo/
     end
   end
 end

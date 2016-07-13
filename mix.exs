@@ -27,7 +27,10 @@ defmodule Idealixir.Mixfile do
   #
   # Type "mix help deps" for more examples and options
   defp deps do
-    [{:httpoison, "~> 0.9.0"},
-     {:exvcr, "~> 0.5", only: :test}]
+    [
+      {:httpoison, "~> 0.9.0"},
+      {:exvcr, "~> 0.5", only: :test},
+      {:poison, "~> 2.0"},
+    ]
   end
 end
