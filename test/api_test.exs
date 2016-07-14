@@ -16,16 +16,23 @@ defmodule IdealixirApiTest do
     :ok
   end
 
-  test "bearer_token returns a token" do
+  test "search returns results" do
+    use_cassette "search_success" do
+      assert {:ok, response} = Idealixir.Api.search(%Idealixir.BearerToken{})
+      assert response.status_code == 200
+    end
+  end
+
+  test "authenticate returns a BearerToken" do
     use_cassette "get_token_success" do
-      assert {:ok, token} = Idealixir.Api.bearer_token
+      assert {:ok, token} = Idealixir.Api.authenticate
       assert token.access_token =~ ~r/eyJh.+miQo/
     end
   end
 
-  test "bearer_token returns an error if credentials are incorrect" do
+  test "authenticate returns an error if credentials are incorrect" do
     use_cassette "get_token_bad_credentials" do
-      assert {:error, message} = Idealixir.Api.bearer_token
+      assert {:error, message} = Idealixir.Api.authenticate
       assert message["error"] == "unauthorized"
     end
   end

@@ -3,9 +3,21 @@ defmodule Idealixir.Api do
 
   @default_base_uri "https://api.idealista.com"
 
-  def bearer_token do
+  def search(token) do
+    request("/3.5/es/search", "", "Bearer " <> token.access_token, [
+      center: "40.42938099999995,-3.7097526269835726",
+      country: "es",
+      maxItems: 50,
+      numPage: 1,
+      distance: 452,
+      propertyType: "homes",
+      operation: "sale",
+    ])
+  end
+
+  def authenticate do
     with {:ok, auth} <- Idealixir.Auth.base64_id_and_secret,
-      {:ok, response} <- request("/oauth/token", "grant_type=client_credentials", auth),
+      {:ok, response} <- request("/oauth/token", "grant_type=client_credentials", "Basic " <> auth),
     do: parse_response(response)
   end
 
@@ -20,11 +32,11 @@ defmodule Idealixir.Api do
     end
   end
 
-  defp request(path, body, auth) do
+  defp request(path, body, auth, params \\ []) do
     post(path, body, [
-      {"Authorization", "Basic " <> auth},
+      {"Authorization", auth},
       {"Content-Type", "application/x-www-form-urlencoded;charset=UTF-8"}
-    ])
+    ], params: params)
   end
 
   defp parse_response(response) do

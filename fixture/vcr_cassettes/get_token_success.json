@@ -9,7 +9,7 @@
       "method": "post",
       "options": [],
       "request_body": "",
-      "url": "https://api.idealista.com/oauth/token"
+      "url": "https://api.idealista.com/oauth/token?"
     },
     "response": {
       "body": "{\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cAI6IkpXVCJ9.eyJleHAiOjE0Njg0Nzg1OTIsInNjb3BlIjpbInJlYWQiXSwiYXV0aG9yaXRpZXMiOlsiUk9MRV9QVUJMSUMiXSwianRpIjoiMzIyNjIwODMtMGY1Ni00ZjRhLTk5OTgtYjQ0ZDdmMjUyYjYyIiwiY2xpZW50X2lkIjoiaHQ1dmNnazFhcmMxbjBobnlic2o4dGc0eXJrbWhoNDMifQ.2Tf57fmRdEz67AfVqWLL-Idx0JgALledtALN82nmiQo\",\"token_type\":\"bearer\",\"expires_in\":43199,\"scope\":\"read\",\"jti\":\"32262083-0f56-4f4a-9998-b44d7f252b62\"}",
