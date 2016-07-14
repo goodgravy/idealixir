@@ -18,8 +18,31 @@ defmodule IdealixirApiTest do
 
   test "search returns results" do
     use_cassette "search_success" do
-      assert {:ok, response} = Idealixir.Api.search(%Idealixir.BearerToken{})
+      assert {:ok, response} = Idealixir.Api.search(%Idealixir.BearerToken{},
+        center: "40.42938099999995,-3.7097526269835726",
+        country: "es",
+        maxItems: 50,
+        numPage: 1,
+        distance: 452,
+        propertyType: "homes",
+        operation: "sale",
+      )
       assert response.status_code == 200
+    end
+  end
+
+  test "search returns error if a parameter is unacceptable" do
+    use_cassette "search_bad_parameter" do
+      assert {:ok, response} = Idealixir.Api.search(%Idealixir.BearerToken{},
+        center: "40.42938099999995,-3.7097526269835726",
+        country: "es",
+        maxItems: 50,
+        numPage: 1,
+        distance: 452,
+        propertyType: "shoebox",
+        operation: "sale",
+      )
+      assert response.status_code == 400
     end
   end
 

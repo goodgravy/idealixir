@@ -3,16 +3,8 @@ defmodule Idealixir.Api do
 
   @default_base_uri "https://api.idealista.com"
 
-  def search(token) do
-    request("/3.5/es/search", "", "Bearer " <> token.access_token, [
-      center: "40.42938099999995,-3.7097526269835726",
-      country: "es",
-      maxItems: 50,
-      numPage: 1,
-      distance: 452,
-      propertyType: "homes",
-      operation: "sale",
-    ])
+  def search(token, params \\ []) do
+    request("/3.5/es/search", "", "Bearer " <> token.access_token, params)
   end
 
   def authenticate do

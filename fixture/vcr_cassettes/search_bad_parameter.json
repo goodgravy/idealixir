@@ -1,0 +1,29 @@
+[
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "Authorization": "Bearer AccessTokenGoesHere",
+        "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "https://api.idealista.com/3.5/es/search?center=40.42938099999995%2C-3.7097526269835726&country=es&maxItems=50&numPage=1&distance=452&propertyType=shoebox&operation=sale"
+    },
+    "response": {
+      "body": "{\"message\":\"Invalid value. Accepted values for propertyType are: bedrooms, garages, homes, offices, premises\",\"httpStatus\":400}",
+      "headers": {
+        "Date": "Thu, 14 Jul 2016 21:34:47 GMT",
+        "Server": "idealista",
+        "Content-Type": "application/json;charset=UTF-8",
+        "Cache-Control": "max-age=0",
+        "Expires": "Thu, 14 Jul 2016 21:34:47 GMT",
+        "Transfer-Encoding": "chunked",
+        "Set-Cookie": "APIPUBID=B|V4gFi|V4gFi; path=/; HttpOnly"
+      },
+      "status_code": 400,
+      "type": "ok"
+    }
+  }
+]
