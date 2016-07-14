@@ -22,4 +22,11 @@ defmodule IdealixirApiTest do
       assert token.access_token =~ ~r/eyJh.+miQo/
     end
   end
+
+  test "bearer_token returns an error if credentials are incorrect" do
+    use_cassette "get_token_bad_credentials" do
+      assert {:error, message} = Idealixir.Api.bearer_token
+      assert message["error"] == "unauthorized"
+    end
+  end
 end

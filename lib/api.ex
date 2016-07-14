@@ -6,7 +6,7 @@ defmodule Idealixir.Api do
   def bearer_token do
     with {:ok, auth} <- Idealixir.Auth.base64_id_and_secret,
       {:ok, response} <- request("/oauth/token", "grant_type=client_credentials", auth),
-    do: Poison.decode(response.body, as: %Idealixir.BearerToken{})
+    do: parse_response(response)
   end
 
   def process_url(url) do
@@ -25,5 +25,12 @@ defmodule Idealixir.Api do
       {"Authorization", "Basic " <> auth},
       {"Content-Type", "application/x-www-form-urlencoded;charset=UTF-8"}
     ])
+  end
+
+  defp parse_response(response) do
+    case response.status_code do
+      200 -> Poison.decode(response.body, as: %Idealixir.BearerToken{})
+      _   -> {:error, Poison.Parser.parse!(response.body)}
+    end
   end
 end
