@@ -1,0 +1,57 @@
+[
+  {
+    "request": {
+      "body": "grant_type=client_credentials",
+      "headers": {
+        "Authorization": "Basic SecretGoesHere",
+        "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "https://api.idealista.com/oauth/token?"
+    },
+    "response": {
+      "body": "{\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cAI6IkpXVCJ9.eyJleHAiOjE0Njg0Nzg1OTIsInNjb3BlIjpbInJlYWQiXSwiYXV0aG9yaXRpZXMiOlsiUk9MRV9QVUJMSUMiXSwianRpIjoiMzIyNjIwODMtMGY1Ni00ZjRhLTk5OTgtYjQ0ZDdmMjUyYjYyIiwiY2xpZW50X2lkIjoiaHQ1dmNnazFhcmMxbjBobnlic2o4dGc0eXJrbWhoNDMifQ.2Tf57fmRdEz67AfVqWLL-Idx0JgALledtALN82nmiQo\",\"token_type\":\"bearer\",\"expires_in\":43199,\"scope\":\"read\",\"jti\":\"32262083-0f56-4f4a-9998-b44d7f252b62\"}",
+      "headers": {
+        "Date": "Wed, 13 Jul 2016 18:43:12 GMT",
+        "Server": "idealista",
+        "Cache-Control": "no-store, max-age=0",
+        "Pragma": "no-cache",
+        "Content-Type": "application/json;charset=UTF-8",
+        "Expires": "Wed, 13 Jul 2016 18:43:12 GMT",
+        "Transfer-Encoding": "chunked",
+        "Set-Cookie": "APIPUBID=B|V4aL1|V5aL1; path=/; HttpOnly"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "Authorization": "Bearer AccessTokenGoesHere",
+        "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "https://api.idealista.com/3.5/en/search?bedrooms=4&center=40.42938099999995%2C-3.7097526269835726&country=es&maxItems=50&numPage=1&distance=452&propertyType=homes&operation=sale"
+    },
+    "response": {
+      "body": "{\"elementList\":[{\"propertyCode\":\"32354824\",\"thumbnail\":\"https://img3.idealista.com/thumbs?wi=140&he=105&en=%2BtSLyO%2BcnvWFQ1vfQ1%2FQRFTP%2FSq%2BGi1w3KcKBBGGT7SX4OXbbi0h%2Bhvp%2FJtQSptCenbPKfuOPIaCEFuXJKqGB5cU1VWesisrLJUHqccKZOukuYN5VRYLz1RLlDEtglEcKFetA5LMd2SHdJFqqai0nA%3D%3D&ch=1851451445\",\"externalReference\":\"nor-53630\",\"numPhotos\":19,\"floor\":\"4\",\"price\":2100000.0,\"propertyType\":\"flat\",\"operation\":\"sale\",\"size\":507.0,\"exterior\":true,\"rooms\":8,\"bathrooms\":2,\"address\":\"calle princesa\",\"province\":\"Madrid\",\"municipality\":\"Madrid\",\"district\":\"Moncloa\",\"country\":\"es\",\"neighborhood\":\"Argüelles\",\"latitude\":40.4256648,\"longitude\":-3.715331,\"showAddress\":false,\"url\":\"http://www.idealista.com/32354824\",\"distance\":\"627\",\"hasVideo\":true,\"status\":\"good\",\"newDevelopment\":false,\"hasLift\":true,\"priceByArea\":4142.0,\"detailedType\":{\"typology\":\"flat\"},\"suggestedTexts\":{\"title\":\"Piso en calle princesa\",\"subtitle\":\"Argüelles, Madrid\"}},{\"propertyCode\":\"33820435\",\"thumbnail\":\"https://img3.idealista.com/thumbs?wi=140&he=105&en=%2BtSLyO%2BcnvWFQ1vfQ1%2FQRJwfu%2BNS%2BxlKCXtthSR4wMDoBGhhHl%2B%2FRAnpsq4VXwiYenbPKfuOPIaCEFuXJKqGB5cU1VWesisrLJUHqccKZOukuYN5VRYLz1RLlDEtglEcKFetA5LMd2SHdJFqqai0nA%3D%3D&ch=178084598\",\"externalReference\":\"nhv0167\",\"numPhotos\":13,\"floor\":\"2\",\"price\":498900.0,\"propertyType\":\"flat\",\"operation\":\"sale\",\"size\":192.0,\"exterior\":true,\"rooms\":10,\"bathrooms\":2,\"address\":\"barrio Gaztambide\",\"province\":\"Madrid\",\"municipality\":\"Madrid\",\"district\":\"Chamberí\",\"country\":\"es\",\"neighborhood\":\"Gaztambide\",\"latitude\":40.4308672,\"longitude\":-3.7111207,\"showAddress\":false,\"url\":\"http://www.idealista.com/33820435\",\"distance\":\"201\",\"hasVideo\":false,\"status\":\"renew\",\"newDevelopment\":false,\"hasLift\":true,\"priceByArea\":2598.0,\"detailedType\":{\"typology\":\"flat\"},\"suggestedTexts\":{\"title\":\"Piso\",\"subtitle\":\"Gaztambide, Madrid\"}}],\"total\":1,\"totalPages\":1,\"actualPage\":1,\"itemsPerPage\":50,\"numPaginations\":0,\"hiddenResults\":false,\"summary\":[\"Comprar\",\"Viviendas\",\"barrio Malasaña-Universidad, Madrid\",\"Todos los precios\",\"Todos los tamaños\"],\"paginable\":false,\"upperRangePosition\":50,\"lowerRangePosition\":0}",
+      "headers": {
+        "Date": "Thu, 14 Jul 2016 21:29:13 GMT",
+        "Server": "idealista",
+        "Content-Type": "application/json;charset=UTF-8",
+        "Cache-Control": "max-age=0",
+        "Expires": "Thu, 14 Jul 2016 21:29:13 GMT",
+        "Transfer-Encoding": "chunked",
+        "Set-Cookie": "APIPUBID=B|V4gEP|V4gEP; path=/; HttpOnly"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]
