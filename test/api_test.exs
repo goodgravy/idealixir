@@ -16,9 +16,9 @@ defmodule IdealixirApiTest do
     :ok
   end
 
-  test "search returns results" do
+  test "search returns Properties" do
     use_cassette "search_success" do
-      assert {:ok, response} = Idealixir.Api.search(%Idealixir.BearerToken{},
+      assert {:ok, properties} = Idealixir.Api.search(%Idealixir.BearerToken{},
         center: "40.42938099999995,-3.7097526269835726",
         country: "es",
         maxItems: 50,
@@ -27,13 +27,14 @@ defmodule IdealixirApiTest do
         propertyType: "homes",
         operation: "sale",
       )
-      assert response.status_code == 200
+      assert length(properties) == 50
+      assert hd(properties).operation == "sale"
     end
   end
 
   test "search returns error if a parameter is unacceptable" do
     use_cassette "search_bad_parameter" do
-      assert {:ok, response} = Idealixir.Api.search(%Idealixir.BearerToken{},
+      assert {:error, message} = Idealixir.Api.search(%Idealixir.BearerToken{},
         center: "40.42938099999995,-3.7097526269835726",
         country: "es",
         maxItems: 50,
@@ -42,7 +43,7 @@ defmodule IdealixirApiTest do
         propertyType: "shoebox",
         operation: "sale",
       )
-      assert response.status_code == 400
+      assert message["message"] == "Invalid value. Accepted values for propertyType are: bedrooms, garages, homes, offices, premises"
     end
   end
 

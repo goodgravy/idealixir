@@ -4,13 +4,14 @@ defmodule Idealixir.Api do
   @default_base_uri "https://api.idealista.com"
 
   def search(token, params \\ []) do
-    request("/3.5/es/search", "", "Bearer " <> token.access_token, params)
+    {:ok, response} = request("/3.5/en/search", "", "Bearer " <> token.access_token, params)
+    parse_search(response)
   end
 
   def authenticate do
     with {:ok, auth} <- Idealixir.Auth.base64_id_and_secret,
       {:ok, response} <- request("/oauth/token", "grant_type=client_credentials", "Basic " <> auth),
-    do: parse_response(response)
+    do: parse_token(response)
   end
 
   def process_url(url) do
@@ -31,10 +32,20 @@ defmodule Idealixir.Api do
     ], params: params)
   end
 
-  defp parse_response(response) do
+  defp parse_token(response) do
     case response.status_code do
       200 -> Poison.decode(response.body, as: %Idealixir.BearerToken{})
       _   -> {:error, Poison.Parser.parse!(response.body)}
+    end
+  end
+
+  defp parse_search(response) do
+    case response.status_code do
+      200 ->
+        {:ok, parsed_body} = Poison.decode(response.body, as: %{"elementList" => [%Idealixir.Property{}]})
+        {:ok, parsed_body["elementList"]}
+      _ ->
+        {:error, Poison.Parser.parse!(response.body)}
     end
   end
 end
