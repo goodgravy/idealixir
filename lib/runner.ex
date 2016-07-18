@@ -7,7 +7,7 @@ defmodule Idealixir.Runner do
   def search(search_params \\ []) do
     {:ok, token} = Idealixir.Api.authenticate
 
-    {:ok, room_range} = params_to_rooms_range(search_params)
+    {:ok, room_range} = Idealixir.SearchParamParser.bedrooms(search_params[:bedrooms])
     api_param = rooms_range_to_api_param(room_range)
     search_params = Keyword.put(search_params, :bedrooms, api_param)
 
@@ -32,13 +32,6 @@ defmodule Idealixir.Runner do
   defp parse_args(args) do
     {extras, [command], _} = OptionParser.parse(args)
     {command, extras}
-  end
-
-  defp params_to_rooms_range(params) do
-    case Keyword.get(params, :bedrooms) do
-      nil -> {:ok, 1..100}
-      bedrooms -> Idealixir.SearchParamParser.bedrooms(bedrooms)
-    end
   end
 
   defp rooms_range_to_api_param(bedrooms_range) do
