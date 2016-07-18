@@ -4,6 +4,8 @@ defmodule Idealixir.SearchParamParser do
 
   ## Examples
 
+      iex> Idealixir.SearchParamParser.bedrooms(nil)
+      {:ok, 1..100}
       iex> Idealixir.SearchParamParser.bedrooms("3+")
       {:ok, 3..100}
       iex> Idealixir.SearchParamParser.bedrooms("2-4")
@@ -15,10 +17,11 @@ defmodule Idealixir.SearchParamParser do
   """
   def bedrooms(bedrooms) do
     cond do
-    match = Regex.run(~r/\A(\d+)\+\z/, bedrooms) -> n_or_more(Enum.at(match, 1))
+    nil == bedrooms                                  -> n_or_more(1)
+    match = Regex.run(~r/\A(\d+)\+\z/, bedrooms)     -> n_or_more(Enum.at(match, 1))
     match = Regex.run(~r/\A(\d+)-(\d+)\z/, bedrooms) -> n_to_m(Enum.at(match, 1), Enum.at(match, 2))
-    match = Regex.run(~r/\A(\d+)\z/, bedrooms) -> exactly_n(Enum.at(match, 1))
-    true -> {:error, "Failed to parse '#{bedrooms}'"}
+    match = Regex.run(~r/\A(\d+)\z/, bedrooms)       -> exactly_n(Enum.at(match, 1))
+    true                                             -> {:error, "Failed to parse '#{bedrooms}'"}
     end
   end
 
