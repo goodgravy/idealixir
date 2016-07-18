@@ -4,7 +4,7 @@ defmodule IdealixirRunnerTest do
   use ExVCR.Mock, adapter: ExVCR.Adapter.Hackney
 
   setup do
-    System.put_env("IDEALISTA_CLIENT_ID", "client_id")
+    System.put_env("IDEALISTA_CLIENT_ID", "client ID")
     System.put_env("IDEALISTA_CLIENT_SECRET", "client secret")
 
     on_exit fn ->
@@ -65,4 +65,3 @@ defmodule IdealixirRunnerTest do
     end
   end
 end
-

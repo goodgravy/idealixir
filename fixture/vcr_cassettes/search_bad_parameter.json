@@ -9,7 +9,7 @@
       "method": "post",
       "options": [],
       "request_body": "",
-      "url": "https://api.idealista.com/3.5/en/search?center=40.42938099999995%2C-3.7097526269835726&country=es&maxItems=50&numPage=1&distance=452&propertyType=shoebox&operation=sale"
+      "url": "https://api.idealista.com/3.5/en/search?apikey=client+ID&center=40.42938099999995%2C-3.7097526269835726&country=es&maxItems=50&numPage=1&distance=452&propertyType=shoebox&operation=sale"
     },
     "response": {
       "body": "{\"message\":\"Invalid value. Accepted values for propertyType are: bedrooms, garages, homes, offices, premises\",\"httpStatus\":400}",

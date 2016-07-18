@@ -4,16 +4,20 @@ defmodule Idealixir.Auth do
     do: {:ok, Base.encode64(id_and_secret)}
   end
 
-  defp id_and_secret do
-    with {:ok, client_id} <- encoded_env_var("IDEALISTA_CLIENT_ID"),
-    {:ok, client_secret} <- encoded_env_var("IDEALISTA_CLIENT_SECRET"),
-    do: {:ok, client_id <> ":" <> client_secret}
+  def client_id do
+    env_var("IDEALISTA_CLIENT_ID")
   end
 
-  defp encoded_env_var(var_name) do
+  defp id_and_secret do
+    with {:ok, client_id} <- env_var("IDEALISTA_CLIENT_ID"),
+    {:ok, client_secret} <- env_var("IDEALISTA_CLIENT_SECRET"),
+    do: {:ok, URI.encode(client_id) <> ":" <> URI.encode(client_secret)}
+  end
+
+  defp env_var(var_name) do
     case System.get_env(var_name) do
       nil   -> {:error, "Required environment variable, #{var_name}, was not set"}
-      value -> {:ok, URI.encode value}
+      value -> {:ok, value}
     end
   end
 end

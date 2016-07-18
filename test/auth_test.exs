@@ -3,7 +3,7 @@ defmodule IdealixirAuthTest do
   doctest Idealixir.Auth
 
   setup do
-    System.put_env("IDEALISTA_CLIENT_ID", "client_id")
+    System.put_env("IDEALISTA_CLIENT_ID", "client id")
     System.put_env("IDEALISTA_CLIENT_SECRET", "client secret")
 
     on_exit fn ->
@@ -25,6 +25,10 @@ defmodule IdealixirAuthTest do
   end
 
   test "with necessary environment variables" do
-    assert {:ok, "Y2xpZW50X2lkOmNsaWVudCUyMHNlY3JldA=="} = Idealixir.Auth.base64_id_and_secret
+    assert {:ok, "Y2xpZW50JTIwaWQ6Y2xpZW50JTIwc2VjcmV0"} = Idealixir.Auth.base64_id_and_secret
+  end
+
+  test "getting client ID" do
+    assert {:ok, "client id"} = Idealixir.Auth.client_id
   end
 end

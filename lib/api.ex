@@ -4,6 +4,8 @@ defmodule Idealixir.Api do
   @default_base_uri "https://api.idealista.com"
 
   def search(token, params \\ []) do
+    {:ok, client_id} = Idealixir.Auth.client_id
+    params = Keyword.put(params, :apikey, client_id)
     {:ok, response} = request("/3.5/en/search", "", "Bearer " <> token.access_token, params)
     parse_search(response)
   end
