@@ -37,7 +37,7 @@ defmodule Idealixir.Api do
   defp parse_token(response) do
     case response.status_code do
       200 -> Poison.decode(response.body, as: %Idealixir.BearerToken{})
-      _   -> {:error, Poison.Parser.parse!(response.body)}
+      _   -> {:error, inspect(response)}
     end
   end
 
@@ -47,7 +47,7 @@ defmodule Idealixir.Api do
         {:ok, parsed_body} = Poison.decode(response.body, as: %{"elementList" => [%Idealixir.Property{}]})
         {:ok, parsed_body["elementList"]}
       _ ->
-        {:error, Poison.Parser.parse!(response.body)}
+        {:error, inspect(response)}
     end
   end
 end

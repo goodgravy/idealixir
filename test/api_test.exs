@@ -43,7 +43,7 @@ defmodule IdealixirApiTest do
         propertyType: "shoebox",
         operation: "sale",
       )
-      assert message["message"] == "Invalid value. Accepted values for propertyType are: bedrooms, garages, homes, offices, premises"
+      assert message =~ ~r/Invalid value. Accepted values for propertyType are: bedrooms, garages, homes, offices, premises/
     end
   end
 
@@ -57,7 +57,7 @@ defmodule IdealixirApiTest do
   test "authenticate returns an error if credentials are incorrect" do
     use_cassette "get_token_bad_credentials" do
       assert {:error, message} = Idealixir.Api.authenticate
-      assert message["error"] == "unauthorized"
+      assert message =~ ~r/unauthorized/
     end
   end
 end
