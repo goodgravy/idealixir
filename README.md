@@ -1,24 +1,24 @@
 # Idealixir
 
-**TODO: Add description**
+A command-line interface to use the [Idealista](http://idealista.com/) search API.
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed as:
+```
+mix escript.build
+```
 
-  1. Add `idealixir` to your list of dependencies in `mix.exs`:
+## Usage
+```
+./idealixir search \
+  --center="40.42938099999995,-3.7097526269835726" \
+  --bedrooms="3" \
+  --country="es" \
+  --maxItems="50" \
+  --numPage="1" \
+  --distance="452" \
+  --propertyType="homes" \
+  --operation="sale"
+```
 
-    ```elixir
-    def deps do
-      [{:idealixir, "~> 0.1.0"}]
-    end
-    ```
-
-  2. Ensure `idealixir` is started before your application:
-
-    ```elixir
-    def application do
-      [applications: [:idealixir]]
-    end
-    ```
-
+All search parameters supported by the search API are supported as command line switches as shown.
